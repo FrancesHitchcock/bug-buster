@@ -29,19 +29,37 @@ function App() {
 
   const bugMarkup = [];
 
+  const bugLocations = [];
+  let left;
+  let top;
+
+  function getBugCoords() {
+    left = Math.floor(Math.random() * 10) * 100;
+    top = Math.floor(Math.random() * 6) * 100;
+  }
+
+  function checkBugLocations() {
+    const locationArr = bugLocations.filter((location) => {
+      return location.top === top && location.left === left;
+    });
+    return locationArr.length > 0 ? true : false;
+  }
+
   for (let i = 0; i < numberOfBugs; i++) {
+    getBugCoords();
+
+    while (checkBugLocations()) {
+      getBugCoords();
+    }
+
+    bugLocations.push({ left: left, top: top });
+
     bugMarkup.push(
-      <Bug
-        key={i}
-        zapBug={zapBug}
-        idFragment={i}
-        left={Math.floor(Math.random() * 10) * 100}
-        top={Math.floor(Math.random() * 6) * 100}
-      />
+      <Bug key={i} zapBug={zapBug} idFragment={i} left={left} top={top} />
     );
   }
 
-  console.log(bugMarkup);
+  console.log(bugLocations);
 
   return (
     <div className="App">
