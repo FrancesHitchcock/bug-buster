@@ -1,3 +1,5 @@
+/* <a href='https://pngtree.com/freepng/vector-bug-icon_4101452.html'>png image from pngtree.com/</a> */
+
 * {
   box-sizing: border-box;
 }
@@ -32,6 +34,8 @@ main {
   height: 600px;
   border: 1px solid red;
   position: relative;
+  /* background-image: url("./images/barley.jpg");
+  background-size: cover; */
 }
 
 .bug-container {
@@ -40,6 +44,13 @@ main {
   background-color: aqua;
   position: absolute;
   border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+.bug-image {
+  width: 100%;
+  object-fit: cover;
 }
 
 .hidden {
@@ -47,7 +58,7 @@ main {
 }
 
 .unhidden {
-  display: block;
+  display: flex;
 }
 
 .visible {

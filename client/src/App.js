@@ -10,6 +10,7 @@ function App() {
   const [timeLeft, setTimeLeft] = useState(20);
   const [bugData, setBugData] = useState([]);
   const [score, setScore] = useState(0);
+  const [gameStarted, setGameStarted] = useState(false);
   const [gameInProgress, setGameInProgress] = useState(false);
   const [gameEnded, setGameEnded] = useState(false);
 
@@ -68,13 +69,20 @@ function App() {
   function endSession() {
     setGameInProgress(false);
     setGameEnded(true);
-    console.log(`session ends. You zapped ${score} bugs!`);
+  }
+
+  function hideBug(bug) {
+    bug.classList.add("hidden");
+    bug.classList.remove("unhidden");
+    bug.classList.remove("visible");
   }
 
   function showBugs() {
     for (let i = 0; i < numberOfBugs; i++) {
       const bug = document.getElementById(`bug-${i}`);
-      const randomMS = Math.floor(Math.random() * (numberOfBugs - 2) * 1000);
+      const randomMS = Math.floor(
+        Math.random() * (numberOfBugs - bugDuration) * 1000
+      );
 
       setTimeout(() => {
         bug.classList.remove("hidden");
@@ -82,21 +90,22 @@ function App() {
         bug.classList.add("visible");
 
         setTimeout(() => {
-          bug.classList.add("hidden");
-          bug.classList.remove("unhidden");
-          bug.classList.remove("visible");
+          hideBug(bug);
         }, 4000);
       }, randomMS);
     }
   }
 
   function zapBug(e) {
-    if (e.target.dataset.bug) {
-      const bug = e.target;
+    if (e.target.dataset.bug || e.target.parentElement.dataset.bug) {
+      let bug;
+      if (e.target.dataset.bug === "bug") {
+        bug = e.target;
+      } else if (e.target.parentElement.dataset.bug === "bug") {
+        bug = e.target.parentElement;
+      }
 
-      bug.classList.add("hidden");
-      bug.classList.remove("unhidden");
-      bug.classList.remove("visible");
+      hideBug(bug);
 
       setScore((prev) => prev + 1);
     }
@@ -132,20 +141,28 @@ function App() {
         </div>
       </header>
       <main>
-        <div className="container main-container">
-          <h2>How many bugs can you zap?</h2>
-          <h3>Click on the bugs as they emerge from the grain!</h3>
-          <div className="controls-container">
-            <button className="start-button" onClick={playGame}>
-              start
-            </button>
-            <div className="score">Score: {score}</div>
-            <div className="time-remaining">
-              Time remaining: {timeLeft} seconds
-            </div>
+        {gameEnded ? (
+          <div className="container main-container">
+            <h2>
+              Well done, you zapped {score} bugs out of {numberOfBugs}!
+            </h2>
           </div>
-          <div className="board-container">{bugMarkup}</div>
-        </div>
+        ) : (
+          <div className="container main-container">
+            <h2>How many bugs can you zap?</h2>
+            <h3>Click on the bugs as they emerge from the grain!</h3>
+            <div className="controls-container">
+              <button className="start-button" onClick={playGame}>
+                start
+              </button>
+              <div className="score">Score: {score}</div>
+              <div className="time-remaining">
+                Time remaining: {timeLeft} seconds
+              </div>
+            </div>
+            <div className="board-container">{bugMarkup}</div>
+          </div>
+        )}
       </main>
       <footer>
         <div className="container footer-container">
