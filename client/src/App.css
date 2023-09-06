@@ -39,6 +39,7 @@ main {
   height: 100px;
   background-color: aqua;
   position: absolute;
+  border-radius: 50%;
 }
 
 .hidden {
