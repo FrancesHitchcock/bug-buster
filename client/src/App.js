@@ -20,12 +20,17 @@ function App() {
 
   function createBugs() {
     const bugLocations = [];
-    let left;
-    let top;
+    let left = null;
+    let top = null;
+    let angle = null;
 
     function getBugCoords() {
       left = Math.floor(Math.random() * 10) * 100;
       top = Math.floor(Math.random() * 6) * 100;
+    }
+
+    function getBugAngle() {
+      angle = Math.floor(Math.random() * 360);
     }
 
     function checkBugLocations() {
@@ -42,7 +47,9 @@ function App() {
         getBugCoords();
       }
 
-      bugLocations.push({ left: left, top: top });
+      getBugAngle();
+
+      bugLocations.push({ left: left, top: top, angle: angle });
     }
     setBugData(bugLocations);
   }
@@ -97,13 +104,15 @@ function App() {
   }
 
   function zapBug(e) {
-    if (e.target.dataset.bug || e.target.parentElement.dataset.bug) {
-      let bug;
-      if (e.target.dataset.bug === "bug") {
-        bug = e.target;
-      } else if (e.target.parentElement.dataset.bug === "bug") {
-        bug = e.target.parentElement;
-      }
+    // if (e.target.dataset.bug || e.target.parentElement.dataset.bug) {
+    //   let bug;
+    //   if (e.target.dataset.bug === "bug") {
+    //     bug = e.target;
+    //   } else if (e.target.parentElement.dataset.bug === "bug") {
+    //     bug = e.target.parentElement;
+    //   }
+    if (e.target.dataset.bug) {
+      const bug = e.target;
 
       hideBug(bug);
 
@@ -125,6 +134,7 @@ function App() {
           idFragment={i}
           left={bugData[i].left}
           top={bugData[i].top}
+          angle={bugData[i].angle}
           zapBug={zapBug}
           bugDuration={bugDuration}
         />
