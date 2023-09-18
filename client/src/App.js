@@ -5,8 +5,11 @@ import { useEffect, useState } from "react";
 import Bug from "./components/Bug";
 
 function App() {
-  const [bugDuration, setBugDuration] = useState(4);
-  const [numberOfBugs, setNumberOfBugs] = useState(20);
+  // const [bugDuration, setBugDuration] = useState(4);
+  // const [numberOfBugs, setNumberOfBugs] = useState(20);
+  const [bugDuration, setBugDuration] = useState(6);
+  const [numberOfBugs, setNumberOfBugs] = useState(10);
+  const [gameDuration, setGameDuration] = useState(20);
   const [timeLeft, setTimeLeft] = useState(20);
   const [bugData, setBugData] = useState([]);
   const [score, setScore] = useState(0);
@@ -88,7 +91,7 @@ function App() {
     for (let i = 0; i < numberOfBugs; i++) {
       const bug = document.getElementById(`bug-${i}`);
       const randomMS = Math.floor(
-        Math.random() * (numberOfBugs - bugDuration) * 1000
+        Math.random() * (gameDuration - bugDuration) * 1000
       );
 
       setTimeout(() => {
@@ -98,19 +101,12 @@ function App() {
 
         setTimeout(() => {
           hideBug(bug);
-        }, 4000);
+        }, bugDuration * 1000);
       }, randomMS);
     }
   }
 
   function zapBug(e) {
-    // if (e.target.dataset.bug || e.target.parentElement.dataset.bug) {
-    //   let bug;
-    //   if (e.target.dataset.bug === "bug") {
-    //     bug = e.target;
-    //   } else if (e.target.parentElement.dataset.bug === "bug") {
-    //     bug = e.target.parentElement;
-    //   }
     if (e.target.dataset.bug) {
       const bug = e.target;
 
@@ -147,7 +143,6 @@ function App() {
       <header>
         <div className="container header-container">
           <h1>Bust That Bug!</h1>
-          <button onClick={clearInterval}>stop</button>
         </div>
       </header>
       <main>
@@ -158,19 +153,17 @@ function App() {
             </h2>
           </div>
         ) : (
-          <div className="container main-container">
-            <h2>How many bugs can you zap?</h2>
-            <h3>Click on the bugs as they emerge from the grain!</h3>
+          <div className="container main-container game-container">
             <div className="controls-container">
-              <button className="start-button" onClick={playGame}>
-                start
-              </button>
               <div className="score">Score: {score}</div>
               <div className="time-remaining">
                 Time remaining: {timeLeft} seconds
               </div>
             </div>
             <div className="board-container">{bugMarkup}</div>
+            <button className="start-button" onClick={playGame}>
+              start game
+            </button>
           </div>
         )}
       </main>
