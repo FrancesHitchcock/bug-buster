@@ -3,6 +3,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 
 import Bug from "./components/Bug";
+import Home from "./pages/Home";
 
 function App() {
   // const [bugDuration, setBugDuration] = useState(4);
@@ -140,12 +141,8 @@ function App() {
 
   return (
     <div className="App">
-      <header>
-        <div className="container header-container">
-          <h1>Bust That Bug!</h1>
-        </div>
-      </header>
-      <main>
+      <Home />
+      {/* <main>
         {gameEnded ? (
           <div className="container main-container">
             <h2>
@@ -166,12 +163,7 @@ function App() {
             </button>
           </div>
         )}
-      </main>
-      <footer>
-        <div className="container footer-container">
-          <h5>Hitchcock Enterprises 2023</h5>
-        </div>
-      </footer>
+      </main> */}
     </div>
   );
 }
