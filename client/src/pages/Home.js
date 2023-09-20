@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Home() {
   return (
     <>
@@ -23,11 +25,18 @@ export default function Home() {
           </p>
           <p className="home-p">
             To play a single game click 'Trial Game'. To select difficulty
-            levels and save your progress click 'Create Account'.
+            levels and save your progress you need to log in or create an
+            account with the 'Log In' button.
           </p>
           <div className="home-button-container">
-            <button className="home-button">Trial Game</button>
-            <button className="home-button">Create Account</button>
+            <Link to="/trial">
+              <button className="home-button">Trial Game</button>
+            </Link>
+            <Link to="/account">
+              <button className="home-button">Log In</button>
+            </Link>
+            {/* <button className="home-button">Trial Game</button>
+            <button className="home-button">Log In</button> */}
           </div>
         </div>
       </main>

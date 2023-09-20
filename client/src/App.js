@@ -2,8 +2,12 @@ import "./reset.css";
 import "./App.css";
 import { useEffect, useState } from "react";
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Bug from "./components/Bug";
 import Home from "./pages/Home";
+import SingleGame from "./pages/SingleGame";
+import AccountGame from "./pages/AccountGame";
 
 function App() {
   // const [bugDuration, setBugDuration] = useState(4);
@@ -141,7 +145,14 @@ function App() {
 
   return (
     <div className="App">
-      <Home />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/trial" element={<SingleGame />} />
+          <Route path="/account" element={<AccountGame />} />
+        </Routes>
+      </BrowserRouter>
+
       {/* <main>
         {gameEnded ? (
           <div className="container main-container">

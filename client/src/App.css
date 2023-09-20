@@ -155,15 +155,31 @@ button {
   padding: 0.25em 0.5em;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  background-color: chartreuse;
+  background: chartreuse;
   border: 2px solid #2a2a2a;
   border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.25s ease-out;
+}
+
+button:hover {
+  transform: scale(1.02);
+  background: radial-gradient(#adff5b, chartreuse);
+}
+
+button:active {
+  transform: scale(0.95);
+  background: radial-gradient(chartreuse, #adff5b);
 }
 
 .home-button {
   margin-top: 2em;
 }
 
-.home-button:nth-child(2) {
+/* .home-button:nth-child(2) {
+  margin-left: 2em;
+} */
+
+.home-button-container a:nth-child(2) {
   margin-left: 2em;
 }
