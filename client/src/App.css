@@ -79,13 +79,13 @@ main {
 /* game */
 
 .game-container {
-  /* justify-content: space-evenly;
-  align-items: center; */
+  justify-content: center;
+  align-items: center;
 }
 
 .controls-container {
-  width: 400px;
-  margin: 0 auto;
+  width: 600px;
+  margin: 0 auto 2em auto;
   display: flex;
   justify-content: space-between;
   font-size: 1.25rem;
@@ -116,6 +116,16 @@ main {
 .bug-image {
   width: 100%;
   object-fit: cover;
+}
+
+.controls-h3 {
+  font-weight: bold;
+  font-size: 1.75rem;
+}
+
+.controls-span {
+  font-size: 1.5em;
+  color: red;
 }
 
 /* utility */
@@ -160,6 +170,15 @@ button {
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.25s ease-out;
+  /* margin-top: 1.5em; */
+}
+
+.start-button {
+  margin-top: 1.5em;
+}
+
+.home-button {
+  margin-top: 2.5em;
 }
 
 button:hover {
@@ -172,9 +191,9 @@ button:active {
   background: radial-gradient(chartreuse, #adff5b);
 }
 
-.home-button {
+/* .home-button {
   margin-top: 2em;
-}
+} */
 
 /* .home-button:nth-child(2) {
   margin-left: 2em;

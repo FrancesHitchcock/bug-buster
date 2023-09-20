@@ -84,6 +84,7 @@ function App() {
   function endSession() {
     setGameInProgress(false);
     setGameEnded(true);
+    setTimeLeft(20);
   }
 
   function hideBug(bug) {
@@ -148,7 +149,19 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/trial" element={<SingleGame />} />
+          <Route
+            path="/trial"
+            element={
+              <SingleGame
+                bugMarkup={bugMarkup}
+                gameEnded={gameEnded}
+                score={score}
+                numberOfBugs={numberOfBugs}
+                timeLeft={timeLeft}
+                playGame={playGame}
+              />
+            }
+          />
           <Route path="/account" element={<AccountGame />} />
         </Routes>
       </BrowserRouter>
