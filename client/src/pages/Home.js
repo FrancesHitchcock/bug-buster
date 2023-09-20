@@ -8,24 +8,27 @@ export default function Home() {
       </header>
       <main>
         <div className="container main-container home-main-container">
-          <h2>
+          <h2 className="home-h2">
             A Tense and Satisfying Game for Farmers, Maltsters and Grain
             Traders!
           </h2>
-          <p>
+          <p className="home-p">
             Bust That Bug is a game of skill and aggression that lets you pit
-            your wits against those pesky grain store pests!
+            your wits against those pesky grain pests!
           </p>
-          <p>
-            The game is set inside a grain store. If you watch the grain
-            carefully you will see bugs emerging slowly from the grain. Click
-            your mouse to zap as many bugs as you can before they disappear back
-            into the grain. Each round lasts 20 seconds.
+          <p className="home-p">
+            The game is set inside a grain store. Watch the grain carefully and
+            you will see the bugs emerging. Click on each bug before it retreats
+            back into the grain. How many bugs can you zap in 20 seconds?
           </p>
-          <p>
-            But beware - The bugs don't stay for long, and once they're gone
-            they're gone!
+          <p className="home-p">
+            To play a single game click 'Trial Game'. To select difficulty
+            levels and save your progress click 'Create Account'.
           </p>
+          <div className="home-button-container">
+            <button className="home-button">Trial Game</button>
+            <button className="home-button">Create Account</button>
+          </div>
         </div>
       </main>
 

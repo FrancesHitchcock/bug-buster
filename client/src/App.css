@@ -26,12 +26,12 @@ footer {
   background-color: #2a2a2a;
 
   text-align: center;
-  padding: 1em;
+  padding: 2em;
 }
 
 header h1 {
   color: #e26d5c;
-  font-size: 3em;
+  font-size: 4rem;
   font-weight: bold;
   font-family: "Eater", cursive;
   text-shadow: 1px 1px 0 black, 2px 2px 5px white;
@@ -39,7 +39,7 @@ header h1 {
 
 footer h5 {
   color: #eee;
-  font-size: 0.825rem;
+  font-size: 1rem;
 }
 
 /* main */
@@ -59,8 +59,21 @@ main {
   align-items: center;
 }
 
+/* home */
+
 .home-main-container {
-  justify-content: flex-start;
+  justify-content: center;
+  text-align: center;
+}
+
+.home-h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.home-p {
+  margin-top: 1em;
+  font-size: 1.5rem;
 }
 
 /* game */
@@ -105,18 +118,6 @@ main {
   object-fit: cover;
 }
 
-.start-button {
-  font-family: inherit;
-  font-size: 1.125rem;
-  font-weight: bold;
-  padding: 0.25em 0.5em;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  background-color: chartreuse;
-  border: 2px solid #2a2a2a;
-  border-radius: 5px;
-}
-
 /* utility */
 
 .hidden {
@@ -143,4 +144,26 @@ main {
   100% {
     opacity: 0;
   }
+}
+
+/* buttons and links */
+
+button {
+  font-family: inherit;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.25em 0.5em;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  background-color: chartreuse;
+  border: 2px solid #2a2a2a;
+  border-radius: 5px;
+}
+
+.home-button {
+  margin-top: 2em;
+}
+
+.home-button:nth-child(2) {
+  margin-left: 2em;
 }
