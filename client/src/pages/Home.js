@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Home() {
+export default function Home({ playTrialGame }) {
   return (
     <>
       <header>
@@ -24,13 +24,15 @@ export default function Home() {
             back into the grain. How many bugs can you zap in 20 seconds?
           </p>
           <p className="home-p">
-            To play a single game click 'Trial Game'. To select difficulty
+            To play a single trial game click 'Trial Game'. To select difficulty
             levels and save your progress you need to log in or create an
             account with the 'Log In' button.
           </p>
           <div className="home-button-container">
             <Link to="/trial">
-              <button className="home-button">Trial Game</button>
+              <button className="home-button" onClick={playTrialGame}>
+                Trial Game
+              </button>
             </Link>
             <Link to="/account">
               <button className="home-button">Log In</button>

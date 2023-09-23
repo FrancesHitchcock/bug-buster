@@ -1,14 +1,18 @@
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import Bug from "../components/Bug";
+import TrialGameEnd from "../components/TrialGameEnd";
+import Game from "../components/Game";
 
-export default function SingleGame({ bugData, numberOfBugs, createBugs }) {
-  const [bugDuration, setBugDuration] = useState(6);
-  //   const [numberOfBugs, setNumberOfBugs] = useState(10);
-  const [gameDuration, setGameDuration] = useState(20);
-  const [timeLeft, setTimeLeft] = useState(20);
-  //   const [bugData, setBugData] = useState([]);
+export default function TrialGame({
+  bugData,
+  numberOfBugs,
+  bugDuration,
+  createBugs,
+  time,
+}) {
+  const [gameDuration, setGameDuration] = useState(time);
+  const [timeLeft, setTimeLeft] = useState(time);
   const [score, setScore] = useState(0);
   const [gameEnded, setGameEnded] = useState(false);
 
@@ -17,7 +21,6 @@ export default function SingleGame({ bugData, numberOfBugs, createBugs }) {
   }, []);
 
   function playGame() {
-    // setGameInProgress(true);
     setGameEnded(false);
     showBugs();
     countDown();
@@ -36,7 +39,6 @@ export default function SingleGame({ bugData, numberOfBugs, createBugs }) {
   }
 
   function endSession() {
-    // setGameInProgress(false);
     setGameEnded(true);
     setTimeLeft(20);
   }
@@ -96,30 +98,14 @@ export default function SingleGame({ bugData, numberOfBugs, createBugs }) {
   return (
     <main>
       {gameEnded ? (
-        <div className="container main-container single-game-ended-container">
-          <h2>
-            Well done, you zapped {score} bugs out of {numberOfBugs}!
-          </h2>
-          <Link to="/">
-            <button className="back-home-button">Home Page</button>
-          </Link>
-        </div>
+        <TrialGameEnd score={score} numberOfBugs={numberOfBugs} />
       ) : (
-        <div className="container main-container game-container">
-          <div className="controls-container">
-            <h3 className="score controls-h3">
-              Score: <span className="controls-span">{score}</span>
-            </h3>
-            <h3 className="time-remaining controls-h3">
-              Time remaining: <span className="controls-span">{timeLeft}</span>{" "}
-              seconds
-            </h3>
-          </div>
-          <div className="board-container">{bugMarkup}</div>
-          <button className="start-button" onClick={playGame}>
-            start game
-          </button>
-        </div>
+        <Game
+          score={score}
+          timeLeft={timeLeft}
+          bugMarkup={bugMarkup}
+          playGame={playGame}
+        />
       )}
     </main>
   );

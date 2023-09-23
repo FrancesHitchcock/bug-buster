@@ -5,12 +5,20 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
-import SingleGame from "./pages/SingleGame";
+import TrialGame from "./pages/TrialGame";
 import AccountGame from "./pages/AccountGame";
 
 function App() {
   const [bugData, setBugData] = useState([]);
-  const [numberOfBugs, setNumberOfBugs] = useState(10);
+  const [numberOfBugs, setNumberOfBugs] = useState(0);
+  const [bugDuration, setBugDuration] = useState(0);
+  const [time, setTime] = useState(0);
+
+  function playTrialGame() {
+    setNumberOfBugs(10);
+    setBugDuration(6);
+    setTime(20);
+  }
 
   function createBugs() {
     const bugLocations = [];
@@ -52,14 +60,16 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home playTrialGame={playTrialGame} />} />
           <Route
             path="/trial"
             element={
-              <SingleGame
+              <TrialGame
                 bugData={bugData}
                 numberOfBugs={numberOfBugs}
+                bugDuration={bugDuration}
                 createBugs={createBugs}
+                time={time}
               />
             }
           />

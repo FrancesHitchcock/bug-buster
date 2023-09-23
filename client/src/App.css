@@ -79,9 +79,10 @@ main {
 /* game */
 
 .game-container,
-.single-game-ended-container {
+.trial-game-ended-container {
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .controls-container {
@@ -124,9 +125,20 @@ main {
   font-size: 1.75rem;
 }
 
-.controls-span {
+.controls-span,
+.end-span {
   font-size: 1.5em;
   color: red;
+}
+
+.trial-end-h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.trial-end-p {
+  margin-top: 1em;
+  font-size: 1.5rem;
 }
 
 /* utility */
