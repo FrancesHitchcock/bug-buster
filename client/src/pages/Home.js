@@ -35,8 +35,6 @@ export default function Home() {
             <Link to="/account">
               <button className="home-button">Log In</button>
             </Link>
-            {/* <button className="home-button">Trial Game</button>
-            <button className="home-button">Log In</button> */}
           </div>
         </div>
       </main>

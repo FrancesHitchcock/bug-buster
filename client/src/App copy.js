@@ -1,90 +1,170 @@
 import "./reset.css";
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Bug from "./components/Bug";
+import Home from "./pages/Home";
+import SingleGame from "./pages/SingleGame";
+import AccountGame from "./pages/AccountGame";
 
 function App() {
-  const [bugDuration, setBugDuration] = useState(4);
-  const [numberOfBugs, setNumberOfBugs] = useState(20);
+  // const [bugDuration, setBugDuration] = useState(4);
+  // const [numberOfBugs, setNumberOfBugs] = useState(20);
+  const [bugDuration, setBugDuration] = useState(6);
+  const [numberOfBugs, setNumberOfBugs] = useState(10);
+  const [gameDuration, setGameDuration] = useState(20);
+  const [timeLeft, setTimeLeft] = useState(20);
+  const [bugData, setBugData] = useState([]);
+  const [score, setScore] = useState(0);
+  const [gameStarted, setGameStarted] = useState(false);
+  const [gameInProgress, setGameInProgress] = useState(false);
+  const [gameEnded, setGameEnded] = useState(false);
+
+  useEffect(() => {
+    createBugs();
+  }, []);
+
+  function createBugs() {
+    const bugLocations = [];
+    let left = null;
+    let top = null;
+    let angle = null;
+
+    function getBugCoords() {
+      left = Math.floor(Math.random() * 10) * 100;
+      top = Math.floor(Math.random() * 6) * 100;
+    }
+
+    function getBugAngle() {
+      angle = Math.floor(Math.random() * 360);
+    }
+
+    function checkBugLocations() {
+      const locationArr = bugLocations.filter((location) => {
+        return location.top === top && location.left === left;
+      });
+      return locationArr.length > 0 ? true : false;
+    }
+
+    for (let i = 0; i < numberOfBugs; i++) {
+      getBugCoords();
+
+      while (checkBugLocations()) {
+        getBugCoords();
+      }
+
+      getBugAngle();
+
+      bugLocations.push({ left: left, top: top, angle: angle });
+    }
+    setBugData(bugLocations);
+  }
+
+  function playGame() {
+    setGameInProgress(true);
+    setGameEnded(false);
+    showBugs();
+    countDown();
+  }
+
+  function countDown() {
+    let time = timeLeft;
+    let interval = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+      time -= 1;
+      if (time < 0) {
+        clearInterval(interval);
+        endSession();
+      }
+    }, 1000);
+  }
+
+  function endSession() {
+    setGameInProgress(false);
+    setGameEnded(true);
+    setTimeLeft(20);
+  }
+
+  function hideBug(bug) {
+    bug.classList.add("hidden");
+    bug.classList.remove("unhidden");
+    bug.classList.remove("visible");
+  }
 
   function showBugs() {
     for (let i = 0; i < numberOfBugs; i++) {
       const bug = document.getElementById(`bug-${i}`);
-      bug.classList.remove("hidden");
-      bug.classList.add("unhidden");
-      bug.classList.add("visible");
+      const randomMS = Math.floor(
+        Math.random() * (gameDuration - bugDuration) * 1000
+      );
 
       setTimeout(() => {
-        bug.classList.add("hidden");
-        bug.classList.remove("unhidden");
-        bug.classList.remove("visible");
-      }, 4000);
+        bug.classList.remove("hidden");
+        bug.classList.add("unhidden");
+        bug.classList.add("visible");
+
+        setTimeout(() => {
+          hideBug(bug);
+        }, bugDuration * 1000);
+      }, randomMS);
     }
   }
 
   function zapBug(e) {
-    console.log(e.target.id);
+    if (e.target.dataset.bug) {
+      const bug = e.target;
+
+      hideBug(bug);
+
+      setScore((prev) => prev + 1);
+    }
+  }
+
+  function playAgain() {
+    createBugs();
   }
 
   const bugMarkup = [];
 
-  const bugLocations = [];
-  let left;
-  let top;
-
-  function getBugCoords() {
-    left = Math.floor(Math.random() * 10) * 100;
-    top = Math.floor(Math.random() * 6) * 100;
-  }
-
-  function checkBugLocations() {
-    const locationArr = bugLocations.filter((location) => {
-      return location.top === top && location.left === left;
-    });
-    return locationArr.length > 0 ? true : false;
-  }
-
-  for (let i = 0; i < numberOfBugs; i++) {
-    getBugCoords();
-
-    while (checkBugLocations()) {
-      getBugCoords();
+  if (bugData.length > 0) {
+    for (let i = 0; i < numberOfBugs; i++) {
+      bugMarkup.push(
+        <Bug
+          key={i}
+          idFragment={i}
+          left={bugData[i].left}
+          top={bugData[i].top}
+          angle={bugData[i].angle}
+          zapBug={zapBug}
+          bugDuration={bugDuration}
+        />
+      );
     }
-
-    bugLocations.push({ left: left, top: top });
-
-    bugMarkup.push(
-      <Bug key={i} zapBug={zapBug} idFragment={i} left={left} top={top} />
-    );
   }
 
   return (
     <div className="App">
-      <header>
-        <div className="container header-container">
-          <h1>Bust That Bug!</h1>
-        </div>
-      </header>
-      <main>
-        <div className="container main-container">
-          <h2>How many bugs can you zap?</h2>
-          <h3>Click on the bugs as they emerge from the grain!</h3>
-          <div className="controls-container">
-            <button className="start-button" onClick={showBugs}>
-              start
-            </button>
-            <div className="score">Score: 0</div>
-            <div className="time-remaining">Time remaining: 20 seconds</div>
-          </div>
-          <div className="board-container">{bugMarkup}</div>
-        </div>
-      </main>
-      <footer>
-        <div className="container footer-container">
-          <h5>Hitchcock Enterprises 2023</h5>
-        </div>
-      </footer>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/trial"
+            element={
+              <SingleGame
+                bugMarkup={bugMarkup}
+                gameEnded={gameEnded}
+                score={score}
+                numberOfBugs={numberOfBugs}
+                timeLeft={timeLeft}
+                playGame={playGame}
+              />
+            }
+          />
+          <Route path="/account" element={<AccountGame />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

@@ -78,7 +78,8 @@ main {
 
 /* game */
 
-.game-container {
+.game-container,
+.single-game-ended-container {
   justify-content: center;
   align-items: center;
 }
@@ -177,7 +178,8 @@ button {
   margin-top: 1.5em;
 }
 
-.home-button {
+.home-button,
+.back-home-button {
   margin-top: 2.5em;
 }
 
@@ -187,7 +189,6 @@ button:hover {
 }
 
 button:active {
-  transform: scale(0.95);
   background: radial-gradient(chartreuse, #adff5b);
 }
 
