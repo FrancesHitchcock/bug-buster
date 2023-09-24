@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
 export default function Home({ playTrialGame }) {
   return (
     <>
-      <header>
-        <div className="container header-container">
-          <h1>Bust That Bug!</h1>
-        </div>
-      </header>
+      <Header />
       <main>
         <div className="container main-container home-main-container">
           <h2 className="home-h2">
@@ -40,12 +39,7 @@ export default function Home({ playTrialGame }) {
           </div>
         </div>
       </main>
-
-      <footer>
-        <div className="container footer-container">
-          <h5>Hitchcock Enterprises 2023</h5>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

@@ -9,10 +9,9 @@ export default function TrialGame({
   numberOfBugs,
   bugDuration,
   createBugs,
-  time,
+  gameDuration,
 }) {
-  const [gameDuration, setGameDuration] = useState(time);
-  const [timeLeft, setTimeLeft] = useState(time);
+  const [timeLeft, setTimeLeft] = useState(gameDuration);
   const [score, setScore] = useState(0);
   const [gameEnded, setGameEnded] = useState(false);
 

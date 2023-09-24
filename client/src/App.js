@@ -12,12 +12,12 @@ function App() {
   const [bugData, setBugData] = useState([]);
   const [numberOfBugs, setNumberOfBugs] = useState(0);
   const [bugDuration, setBugDuration] = useState(0);
-  const [time, setTime] = useState(0);
+  const [gameDuration, setGameDuration] = useState(0);
 
   function playTrialGame() {
     setNumberOfBugs(10);
     setBugDuration(6);
-    setTime(20);
+    setGameDuration(20);
   }
 
   function createBugs() {
@@ -69,7 +69,7 @@ function App() {
                 numberOfBugs={numberOfBugs}
                 bugDuration={bugDuration}
                 createBugs={createBugs}
-                time={time}
+                gameDuration={gameDuration}
               />
             }
           />

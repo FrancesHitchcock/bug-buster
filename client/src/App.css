@@ -79,6 +79,7 @@ main {
 /* game */
 
 .game-container,
+.form-container,
 .trial-game-ended-container {
   justify-content: center;
   align-items: center;
@@ -141,6 +142,25 @@ main {
   font-size: 1.5rem;
 }
 
+.name-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid red;
+}
+
+.name-label {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 2em;
+}
+
+.name-input {
+  width: 100%;
+  font-size: 2rem;
+  padding: 0.5em;
+}
+
 /* utility */
 
 .hidden {
@@ -191,7 +211,8 @@ button {
 }
 
 .home-button,
-.back-home-button {
+.back-home-button,
+.submit-button {
   margin-top: 2.5em;
 }
 

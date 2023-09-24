@@ -4,8 +4,8 @@ export default function TrialGameEnd({ score, numberOfBugs }) {
   return (
     <div className="container main-container trial-game-ended-container">
       <h2 className="trial-end-h2">
-        Well done, you zapped <span className="end-span">{score}</span> bugs out
-        of <span className="end-span">{numberOfBugs}</span>!
+        Well done! You zapped <span className="end-span">{score}</span> bugs out
+        of <span className="end-span">{numberOfBugs}</span>
       </h2>
       <p className="trial-end-p">But that was too easy, wasn't it?</p>
       <p className="trial-end-p">
